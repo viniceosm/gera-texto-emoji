@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Gerador texto emoji</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<style type="text/css">
+* {
+	box-sizing: border-box;
+}
+body {
+	background-color: black;
+	color: white;
+	margin: 0;
+}
+body > div {
+	width: 100%;
+	padding: 10px;
+}
+textarea {
+	width: 100%;
+	background: grey;
+    color: white;
+}
+button {
+	background-color: green;
+	border: 0px solid;
+	width: 100%;
+	padding: 8px 0px;
+}
+</style>
+
+<body>
+	<div>
+		<textarea id="texto" rows="5"></textarea>
+		<br>
+		<button onclick="geraTextoEmoji();">Gerar</button>
+		<hr>
+		<div id="resultado"></div>
+	</div>
+</body>
+
+<script>
+function geraTextoEmoji() {
+	var texto = document.getElementById('texto').value;
+
+	var emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '🥲', '☺️', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🥸', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '🥵', '🥶', '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪', '😵', '🤐', '🥴', '🤢', '🤮', '🤧', '😷', '🤒', '🤕', '🤑', '🤠', '😈', '👿', '👹', '👺', '🤡', '💩', '👻', '💀', '☠️', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾', '👋', '🤚', '🖐', '✋', '🖖', '👌', '🤌', '🤏', '✌', '🤞', '🤟', '🤘', '🤙', '👈', '👉', '👆', '🖕', '👇', '☝', '👍', '👎', '✊', '👊', '🤛', '🤜', '👏', '🙌', '👐', '🤲', '🤝', '🙏', '✍', '💅', '💥', '🔥', '❗️'];
+
+	var texto_splited = texto.split(' ');
+	var texto_splited_new = texto_splited;
+
+	var cont_espace = (texto.match(/ /g) || []).length;
+	var cont_emoji_add = Math.floor(Math.random() * cont_espace) + 1;
+
+	var index_palavras_com_emoji = [];
+
+	for (var i=0; i<cont_emoji_add; i++) {
+		index_palavras_com_emoji.push(Math.floor(Math.random() * texto_splited.length) + 0);
+	}
+
+	for (var i of index_palavras_com_emoji) {
+		var index_emoji = Math.floor(Math.random() * emojis.length) + 0;
+		texto_splited_new.splice(i+1, 0, emojis[index_emoji]);
+	}
+
+	document.getElementById('resultado').innerHTML = texto_splited_new.join(' ');
+}
+</script>
+</html>
